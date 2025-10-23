@@ -12,6 +12,8 @@ import java.util.*;
 @Table(name = "execution_history")
 public class ExecutionHistory {
 
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "u_id")
@@ -19,6 +21,9 @@ public class ExecutionHistory {
 
     @Column(name = "u_connection_id")
     private UUID connectionId;
+
+
+
 
     @Column(name = "s_query")
     private String query;
