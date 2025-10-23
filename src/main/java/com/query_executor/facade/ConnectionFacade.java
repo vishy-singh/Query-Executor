@@ -36,6 +36,7 @@ public class ConnectionFacade {
             try (Connection conn = pgConn.getDataSource().getConnection()) {
                 log.info("Connected and validated! Ready to execute queries.");
 
+
                 dao.save(
                         ConnectionEntity.builder()
                                 .host(dto.getHost())
