@@ -20,7 +20,10 @@ public class QueryExecutoryController {
 
 
 
+
     public String executeQuery(@RequestBody QueryExecutorRequestDto dto){
+
+
 
 
         return null;
