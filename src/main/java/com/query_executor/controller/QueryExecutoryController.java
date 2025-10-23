@@ -29,7 +29,7 @@ public class QueryExecutoryController {
 
     public void createConnection(@RequestBody ConnectionDto dto){
 
-        connectionFacade.CreateConnection(dto);
+        connectionFacade.createConnection(dto);
 
     }
 

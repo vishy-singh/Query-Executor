@@ -6,18 +6,21 @@ import com.query_executor.dao.*;
 import com.query_executor.entity.*;
 import com.query_executor.utils.dto.*;
 import lombok.*;
+import lombok.extern.log4j.*;
 import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.*;
 
+
+@Log4j2
 @Service
 @AllArgsConstructor
 public class ConnectionFacade {
 
     private final ConnectionDao dao;
 
-    public void CreateConnection(@RequestBody ConnectionDto dto) {
+    public void createConnection(@RequestBody ConnectionDto dto) {
 
         PostgresConnection pgConn = new PostgresConnection();
         try {
@@ -31,7 +34,7 @@ public class ConnectionFacade {
             pgConn.validate();
 
             try (Connection conn = pgConn.getDataSource().getConnection()) {
-                System.out.println("Connected and validated! Ready to execute queries.");
+                log.info("Connected and validated! Ready to execute queries.");
 
                 dao.save(
                         ConnectionEntity.builder()
@@ -48,7 +51,7 @@ public class ConnectionFacade {
             }
 
         } catch (Exception e) {
-            System.err.println("Validation failed: " + e.getMessage());
+            log.error("Validation failed: " + e.getMessage());
         } finally {
             pgConn.close(); // Close the pool
         }
