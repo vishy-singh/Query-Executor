@@ -55,7 +55,7 @@ public class ConnectionFacade {
 
             log.error("Validation failed: " + e.getMessage());
         } finally {
-            pgConn.close(); // Close the pool
+            pgConn.close();
         }
     }
 
