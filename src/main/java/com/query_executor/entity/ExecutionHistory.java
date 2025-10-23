@@ -13,7 +13,6 @@ import java.util.*;
 public class ExecutionHistory {
 
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "u_id")
