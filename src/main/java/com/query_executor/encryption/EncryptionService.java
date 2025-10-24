@@ -9,6 +9,17 @@ import java.security.*;
 import java.security.spec.*;
 import java.util.*;
 
+/**
+ * Service for encrypting and decrypting string values using AES encryption with a key derived from PBKDF2.
+ * <p>
+ * <b>Features:</b>
+ * <ul>
+ *     <li>Encrypts plain text strings to Base64-encoded AES-encrypted strings.</li>
+ *     <li>Decrypts Base64-encoded AES-encrypted strings back to plain text.</li>
+ *     <li>Uses PBKDF2WithHmacSHA256 for key derivation with a static key and salt.</li>
+ * </ul>
+ * <b>Security Note:</b> For production use, consider storing the key and salt securely and not hardcoding them.
+ */
 @Log4j2
 @Service
 public class EncryptionService {
@@ -18,6 +29,12 @@ public class EncryptionService {
     private static final String ENCRYPTION_ALGO = "AES";
 
 
+    /**
+     * Encrypts the given plain text string using AES encryption.
+     *
+     * @param value the plain text string to encrypt
+     * @return the Base64-encoded AES-encrypted string, or null if encryption fails
+     */
     public String encrypt(String value) {
         try {
             SecretKey secretKey = generateSecretKey();
@@ -31,6 +48,12 @@ public class EncryptionService {
         return null;
     }
 
+    /**
+     * Decrypts the given Base64-encoded AES-encrypted string back to plain text.
+     *
+     * @param value the Base64-encoded AES-encrypted string
+     * @return the decrypted plain text string, or null if decryption fails
+     */
     public String decrypt(String value) {
         try {
             SecretKey secretKey = generateSecretKey();
@@ -46,6 +69,13 @@ public class EncryptionService {
         return null;
     }
 
+    /**
+     * Generates a secret AES key using PBKDF2 with the configured key and salt.
+     *
+     * @return the generated AES secret key
+     * @throws NoSuchAlgorithmException if the PBKDF2 algorithm is not available
+     * @throws InvalidKeySpecException if the key specification is invalid
+     */
     private SecretKey generateSecretKey() throws NoSuchAlgorithmException, InvalidKeySpecException {
         SecretKeyFactory secretKeyFactory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256");
         char[] keyBytes = ENCRYPTION_KEY.toCharArray();
