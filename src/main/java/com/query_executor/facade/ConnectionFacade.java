@@ -20,6 +20,21 @@ public class ConnectionFacade {
 
     private final ConnectionDao dao;
 
+    /**
+     * Creates a new database connection using the provided connection details.
+     * <p>
+     * This method performs the following steps:
+     * <ol>
+     *     <li>Initializes a {@link PostgresConnection} instance with the connection details from the {@link ConnectionDto}.</li>
+     *     <li>Validates the connection parameters by attempting to connect to the database.</li>
+     *     <li>If the connection is successful, saves the connection details to the database using {@link ConnectionDao}.</li>
+     *     <li>Logs the status of the connection and handles any exceptions that may occur during the process.</li>
+     *     <li>Ensures that the database connection is properly closed in all cases.</li>
+     * </ol>
+     *
+     * @param dto the {@link ConnectionDto} containing the connection parameters such as host, port, database, username, password, and schema
+     * @throws RuntimeException if validation or saving the connection fails
+     */
     public void createConnection(@RequestBody ConnectionDto dto) {
 
         PostgresConnection pgConn = new PostgresConnection();

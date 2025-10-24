@@ -1,11 +1,21 @@
 package com.query_executor.connection;
 
+import lombok.*;
+
 import javax.sql.DataSource;
 import java.sql.SQLException;
 
+@Getter
 public abstract class AbstractConnection {
 
+    /**
+     * -- GETTER --
+     *  Return the DataSource to execute queries
+     */
     protected DataSource dataSource;
+
+
+
 
     /**
      * Initialize connection pool with client credentials
@@ -16,13 +26,6 @@ public abstract class AbstractConnection {
      * Validate schema and permissions
      */
     public abstract void validate() throws SQLException;
-
-    /**
-     * Return the DataSource to execute queries
-     */
-    public DataSource getDataSource() {
-        return dataSource;
-    }
 
     /**
      * Close connection pool if applicable

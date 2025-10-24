@@ -36,6 +36,8 @@ public class EncryptionService {
             SecretKey secretKey = generateSecretKey();
             Cipher cipher = Cipher.getInstance(ENCRYPTION_ALGO);
             cipher.init(Cipher.DECRYPT_MODE, secretKey);
+
+
             byte[] decryptedBytes = cipher.doFinal(Base64.getDecoder().decode(value));
             return new String(decryptedBytes);
         } catch (Exception e) {
